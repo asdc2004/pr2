@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Streaming and Chat</title>
+</head>
+<body>
+    <h1>Video Streaming and Chat</h1>
+    <div>
+        <!-- 비디오 플레이어: "video.mp4" 파일을 사용 -->
+        <video id="video" autoplay>
+            <source src="video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div>
+        <!-- 채팅 입력 필드와 전송 버튼 -->
+        <input type="text" id="message" placeholder="Type a message">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    <div>
+        <!-- 채팅 메시지를 표시할 목록 -->
+        <ul id="chat"></ul>
+    </div>
+    <script>
+        const video = document.getElementById('video'); // 비디오 요소
+        const messageInput = document.getElementById('message'); // 채팅 입력 필드
+        const chatList = document.getElementById('chat'); // 채팅 메시지 목록
+
+        const socket = new WebSocket('ws://localhost:8888'); // WebSocket 연결
+
+        // 서버로부터 채팅 메시지를 받았을 때 처리
+        socket.onmessage = (event) => {
+            const message = document.createElement('li'); // 새로운 리스트 아이템 생성
+            message.textContent = event.data; // 메시지 내용을 텍스트로 설정
+            chatList.appendChild(message); // 메시지를 채팅 목록에 추가
+        };
+
+        // 채팅 메시지 전송 함수
+        function sendMessage() {
+            const message = messageInput.value; // 입력된 메시지 가져오기
+            if (message) {
+                socket.send(message); // 서버로 메시지 전송
+                messageInput.value = ''; // 입력 필드 비우기
+            }
+        }
+
+        // 비디오 스트림 표시 함수
+        async function startVideo() {
+            // 비디오 스트림 표시 코드를 여기에 추가
+        }
+
+        startVideo(); // 비디오 스트림 표시 함수 호출
+    </script>
+</body>
+</html>
