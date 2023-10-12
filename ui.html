@@ -28,7 +28,7 @@
         const messageInput = document.getElementById('message'); // 채팅 입력 필드
         const chatList = document.getElementById('chat'); // 채팅 메시지 목록
 
-        const socket = new WebSocket('ws://localhost:8888'); // WebSocket 연결
+        const socket = new WebSocket('ws://localhost:8080'); // WebSocket 연결
 
         // 서버로부터 채팅 메시지를 받았을 때 처리
         socket.onmessage = (event) => {
