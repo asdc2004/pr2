@@ -51,7 +51,7 @@ def chat():
 
 if __name__ == '__main__':
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind(('0.0.0.0', 8888))
+    server_socket.bind(('0.0.0.0', 8080))
     server_socket.listen(5)
 
     video_thread = threading.Thread(target=video_stream)
